@@ -40,13 +40,16 @@ var Providers = []ProviderDetails{
 
 func getAllPrices(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
+	w.Header().Add("Access-Control-Allow-Origin", "*")
+	w.Header().Add("Access-Control-Allow-Credentials", "true")
+	w.Header().Add("Access-Control-Allow-Headers", "Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization, accept, origin, Cache-Control, X-Requested-With")
 	json.NewEncoder(w).Encode(Providers)
 }
 
 func main() {
 	port := 10000
 	r := mux.NewRouter()
-	r.HandleFunc("/prices", getAllPrices).Methods("GET")
+	r.HandleFunc("/", getAllPrices).Methods("GET")
 	fmt.Printf("Server is running on port %d\n", port)
 	http.ListenAndServe(fmt.Sprintf(":%d", port), r)
 }
