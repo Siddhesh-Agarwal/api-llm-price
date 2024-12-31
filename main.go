@@ -44,7 +44,7 @@ func getAllPrices(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
-	port := ":8080"
+	port := ":80"
 	r := mux.NewRouter()
 	r.HandleFunc("/prices", getAllPrices).Methods("GET")
 	fmt.Printf("Server is running on port %s\n", port)
